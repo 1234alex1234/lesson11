@@ -4,13 +4,15 @@ let rollback = 5;
 let title = prompt("Как называется наш проект");
 let screens = prompt("Какие типы экранов нужно разработать");
 let screenPrice = +prompt("Сколько будет стоить данная работа");
-let adaptive = !!prompt("Нужен ли адаптив на сайте");
+let adaptive = !!confirm("Нужен ли адаптив на сайте");
 
 let service1 = prompt("Какой дополнительный вид услуг нужен");
 let servicePrice1 = +prompt("Сколько это будет стоить");
 let service2 = prompt("Какой дополнительный вид услуг нужен");
 let servicePrice2 = +prompt("Сколько это будет стоить");
 let fullPrice;
+let allServicePrices;
+let servicePercentPrice;
 
 
 const getAllServicePrices = function() {
@@ -49,9 +51,9 @@ function getRollbackMassage() {
 }
 
 
-let allServicePrices = getAllServicePrices();
+allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
-let servicePercentPrice = getServicePercentPrices();
+servicePercentPrice = getServicePercentPrices();
 
 showTypeOf(title);
 showTypeOf(fullPrice);
