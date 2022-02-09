@@ -12,7 +12,6 @@ let service2;
 let servicePrice2;
 
 let fullPrice;
-let ask;
 let allServicePrices;
 let servicePercentPrice;
 
@@ -87,7 +86,7 @@ function getRollbackMassage() {
 }
 
 
-ask = asking();
+asking();
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
