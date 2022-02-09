@@ -1,8 +1,8 @@
 // //Переменные
 let rollback = 5;
 
-let title = prompt("Как называется наш проект", "Калькулятор верстки");
-let screens = prompt("Какие типы экранов нужно разработать", "Простые, Сложные, Интерактивные");
+let title;
+let screens;
 let screenPrice;
 let adaptive;
 
@@ -12,12 +12,24 @@ let service2;
 let servicePrice2;
 
 let fullPrice;
+let ask;
 let allServicePrices;
 let servicePercentPrice;
 
 
 const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num);
+};
+
+const asking = function () {
+  title = prompt("Как называется наш проект", "Калькулятор верстки");
+  screens = prompt("Какие типы экранов нужно разработать", "Простые, Сложные, Интерактивные");
+
+  do {
+    screenPrice = prompt("Сколько будет стоить данная работа", 20000);
+  } while (!isNumber(screenPrice));
+
+  adaptive = confirm("Нужен ли адаптив на сайте");
 };
 
 const getAllServicePrices = function () {
@@ -74,18 +86,8 @@ function getRollbackMassage() {
   }
 }
 
-let i = 0;
-do {
-  screenPrice = prompt("Сколько будет стоить данная работа", 20000);
-  if (isNumber(screenPrice)) {
-    i++;
-  } else {
-    alert("Введите пожалуйста число!");
-  }
-} while (i < 1);
 
-
-adaptive = confirm("Нужен ли адаптив на сайте");
+ask = asking();
 allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice();
 servicePercentPrice = getServicePercentPrices();
