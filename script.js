@@ -2,6 +2,10 @@ const isNumber = function (num) {
   return !isNaN(parseFloat(num)) && isFinite(num);
 };
 
+const isTrim = function (num) {
+  return (num.length === 0 || !num.trim());
+};
+
 
 const appData = {
   rollback: 5,
@@ -29,15 +33,16 @@ const appData = {
 
   asking: function () {
     appData.title = prompt("Как называется наш проект", "Калькулятор верстки");
-    while (isNumber(appData.title)) {
-      alert("введите что то кроме цифр, пжл!");
+    while (isNumber(appData.title) || isTrim(appData.title)) {
+      alert("введите что то кроме цифр, пжл!И не оставляйте строку пустой!");
       appData.title = prompt("Как называется наш проект", "Калькулятор верстки");
     }
 
+
     for (let i = 0; i < 3; i++) {
       let name = prompt("Какие типы экранов нужно разработать");
-      while (isNumber(name)) {
-        alert("введите что то кроме цифр, пжл!");
+      while (isNumber(name) || isTrim(name)) {
+        alert("введите что то кроме цифр, пжл!И не оставляйте строку пустой!");
         name = prompt("Какие типы экранов нужно разработать");
       }
 
@@ -62,8 +67,8 @@ const appData = {
 
     for (let i = 0; i < 2; i++) {
       let name = prompt("Какой дополнительный вид услуг нужен");
-      while (isNumber(name)) {
-        alert("введите что то кроме цифр, пжл!");
+      while (isNumber(name) || isTrim(name)) {
+        alert("введите что то кроме цифр, пжл!И не оставляйте строку пустой!");
         name = prompt("Какой дополнительный вид услуг нужен");
       }
 
@@ -119,6 +124,7 @@ const appData = {
     console.log("Стоимость доп услуг", appData.allServicePrices);
     console.log(appData.getRollbackMassage());
     console.log("Стоимость с учетом скидки", appData.servicePercentPrice);
+    console.log(appData.screens);
 
     for (let key in appData) {
       console.log(key + ":" + appData[key]);
