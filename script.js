@@ -22,6 +22,8 @@ function changeWidth() {
   rangeSpan.innerText = this.value;
 };
 
+
+rangeSpan.innerText = inputRange.value;
 gmyk.style.display = 'none';
 
 btn.addEventListener("click", changeColor);
