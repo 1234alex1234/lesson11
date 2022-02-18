@@ -11,9 +11,7 @@ let ulBook6;
 
 //Задание 1===================================
 books = document.querySelector('.books');
-console.log(books);
 book = document.querySelectorAll('.book');
-console.log(book);
 books.append(book[2]);
 books.prepend(book[1]);
 book[3].before(book[4]);
@@ -45,7 +43,6 @@ liBook2[6].after(liBook2[8]);
 liBook2[9].after(liBook2[2]);
 
 liBook5 = book[5].querySelectorAll('li');
-console.log(liBook5);
 liBook5[2].before(liBook5[9]);
 liBook5[9].after(liBook5[3]);
 liBook5[3].after(liBook5[4]);
