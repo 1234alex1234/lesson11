@@ -1,30 +1,66 @@
-const box = document.querySelector('#square');
-const yellowCircle = document.querySelector('#circle');
-const gmyk = document.querySelector('#e_btn');
-const btn = document.querySelector('#btn');
-const inputRange = document.querySelector('input[type="range"]');
-const rangeSpan = document.querySelector('#range-span');
+const todoControl = document.querySelector('.todo-control');
+const todoList = document.querySelector('.todo-list');
+const todoCompleted = document.querySelector('.todo-completed');
+const headerInput = document.querySelector('.header-input');
+const todoRemove = document.querySelector('.todo-remove');
+
+let todoData = JSON.parse(localStorage.getItem('work')) || [];
 
 
-function changeColor() {
-  const inputValue = document.querySelector('input[type="text"]').value;
-  box.style.background = inputValue;
-  document.querySelector('input[type="text"]').value = '';
+
+const render = function () {
+  todoList.innerHTML = '';
+  todoCompleted.innerHTML = '';
+  todoData.forEach(function (item, index) {
+    const li = document.createElement('li');
+
+    li.classList.add('todo-item');
+    li.innerHTML = `
+        <span class="text-todo">${item.text}</span>
+        <div class="todo-buttons">
+          <button class="todo-remove"></button>
+          <button class="todo-complete"></button>
+        </div>`;
+
+    if (item.completed) {
+      todoCompleted.append(li);
+    } else {
+      todoList.append(li);
+    }
+
+    li.querySelector('.todo-complete').addEventListener("click", function () {
+      item.completed = !item.completed;
+      localStorage.setItem('work', JSON.stringify(todoData));
+      render();
+    });
+
+    li.querySelector('.todo-remove').addEventListener("click", function (e) {
+      todoData.splice(index, 1);
+      localStorage.setItem('work', JSON.stringify(todoData));
+      render();
+    });
+  });
 };
 
-function changeWidth() {
-  let widthCircle = yellowCircle.offsetWidth;
-  let heightCircle = yellowCircle.offsetWidth;
-  widthCircle = `${this.value}%`;
-  heightCircle = `${this.value}%`;
-  yellowCircle.style.width = widthCircle;
-  yellowCircle.style.height = heightCircle;
-  rangeSpan.innerText = this.value;
-};
+
+todoControl.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let newTodo = {
+    text: headerInput.value,
+    completed: false,
+  };
 
 
-rangeSpan.innerText = inputRange.value;
-gmyk.style.display = 'none';
+  if (newTodo.text.trim() !== '') {
+    todoData.push(newTodo);
+  }
 
-btn.addEventListener("click", changeColor);
-inputRange.addEventListener("input", changeWidth);
+  localStorage.setItem('work', JSON.stringify(todoData));
+
+  render();
+
+  headerInput.value = '';
+});
+
+render();
