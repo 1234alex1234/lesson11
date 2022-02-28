@@ -28,22 +28,26 @@ const render = function () {
       todoList.append(li);
     }
 
-    li.querySelector('.todo-complete').addEventListener("click", function () {
+
+    function workComplited() {
       item.completed = !item.completed;
       localStorage.setItem('work', JSON.stringify(todoData));
       render();
-    });
+    }
 
-    li.querySelector('.todo-remove').addEventListener("click", function (e) {
+    function workRemove() {
       todoData.splice(index, 1);
       localStorage.setItem('work', JSON.stringify(todoData));
       render();
-    });
+    }
+
+    li.querySelector('.todo-complete').addEventListener("click", workComplited);
+
+    li.querySelector('.todo-remove').addEventListener("click", workRemove);
   });
 };
 
-
-todoControl.addEventListener("submit", function (e) {
+function arrowPush(e) {
   e.preventDefault();
 
   let newTodo = {
@@ -61,6 +65,8 @@ todoControl.addEventListener("submit", function (e) {
   render();
 
   headerInput.value = '';
-});
+}
+
+todoControl.addEventListener("submit", arrowPush);
 
 render();
